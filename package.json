@@ -1,0 +1,26 @@
+{
+  "name": "plex-control",
+  "version": "0.0.1",
+  "description": "Controlling Plex clients through the Plex Media Server HTTP API",
+  "main": "lib/control.js",
+  "dependencies": {
+    "plex-api": "0.2.x"
+  },
+  "devDependencies": {
+    "buster": "0.6.x"
+  },
+  "scripts": {
+    "test": "buster test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/phillipj/node-plex-control"
+  },
+  "keywords": [
+    "plex",
+    "api",
+    "control"
+  ],
+  "author": "Phillip Johnsen <phillip@lightweight.no>",
+  "license": "MIT"
+}
