@@ -1,3 +1,5 @@
+**Work in progress, not released yet!**
+
 # plex-control
 
 Module simplifying the controlling of Plex clients. Utilises the Plex Media Server HTTP API.
