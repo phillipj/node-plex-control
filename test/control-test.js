@@ -27,23 +27,15 @@ buster.testCase("Module API", {
 		assert.equals(this.control.constructor.name, "PlexControl");
 	},
 
-	"PlexControl should extend PlexAPI": function() {
-		assert(this.control instanceof PlexAPI);
-	},
-
-	"should require first parameter": function() {
+	"should require server host as first parameter": function() {
 		assert.exception(function() {
 			new PlexControl();
 		}, "TypeError");
 	},
 
-	"third parameter should set port of Plex Media Server": function() {
-		this.control = new PlexControl(SERVER_HOST, CLIENT_HOST, 32400);
-		assert.equals(this.control.getPort(), 32400);
+	"should require client IP or host as second parameter": function() {
+		assert.exception(function() {
+			new PlexControl(SERVER_HOST);
+		}, "TypeError");
 	},
-
-	"port should be 32400 when second parameter is not given in constructor": function() {
-		assert.equals(this.control.getPort(), 32400);
-	},
-
 });
