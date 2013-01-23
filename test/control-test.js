@@ -38,10 +38,6 @@ buster.testCase("Module API", {
 		}, "TypeError");
 	},
 
-	"// should have optional third parameter setting server port": function() {
-		this.control = new PlexControl(SERVER_HOST, CLIENT_HOST, 32401);
-	},
-
 	"getClients": {
 		"method exists": function() {
 			assert.isFunction(this.control.getClients);
