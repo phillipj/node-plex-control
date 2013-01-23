@@ -3,8 +3,12 @@ var fs = require("fs");
 
 var PLEX_SERVER_PORT = 32400;
 
+var requestedUris = [];
+
 var server = http.createServer(function(req, res) {
 	var sampleFilename = "root";
+
+	recordRequestedUri(req.url);
 
 	if (req.url === "/library/sections/1/refresh") {
 		res.writeHead(200);
@@ -25,6 +29,10 @@ function deliverXml(filename, response) {
 	});
 }
 
+function recordRequestedUri(uri) {
+	requestedUris.push(uri);
+}
+
 module.exports = {
 	start: function (port) {
 		server.listen(port || PLEX_SERVER_PORT);
@@ -32,5 +40,11 @@ module.exports = {
 
 	stop: function() {
 		server.close();
+	},
+
+	uri: function(uri) {
+		return {
+			requested: typeof requestedUris[uri] !== undefined
+		}
 	}
 };
