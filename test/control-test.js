@@ -1,5 +1,4 @@
 var buster = require("buster");
-var PlexAPI = require("plex-api");
 var server = require("./server");
 
 var SERVER_HOST = "localhost";
@@ -38,4 +37,35 @@ buster.testCase("Module API", {
 			new PlexControl(SERVER_HOST);
 		}, "TypeError");
 	},
+
+	"// should have optional third parameter setting server port": function() {
+		this.control = new PlexControl(SERVER_HOST, CLIENT_HOST, 32401);
+	},
+
+	"getClients": {
+		"method exists": function() {
+			assert.isFunction(this.control.getClients);
+		},
+
+		"should request API resource /clients": function(done) {
+			this.control.getClients(function(err, clients) {
+				assert(server.uri("/clients").requested);
+				done();
+			});
+		},
+
+		"should retrieve available Plex clients from API": function(done) {
+			this.control.getClients(function(err, clients) {
+				assert.equals(1, clients.length);
+				done();
+			});
+		},
+
+		"should flatten clients objects recieved from the API by having the attributes directly onto the object": function(done) {
+			this.control.getClients(function(err, clients) {
+				assert.equals(clients[0].name, "mac-mini");
+				done();
+			});
+		}
+	}
 });
