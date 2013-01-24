@@ -3,7 +3,7 @@ var fs = require("fs");
 
 var PLEX_SERVER_PORT = 32400;
 
-var requestedUris = [];
+var requestCountOnUri;
 
 var server = http.createServer(function(req, res) {
 	var sampleFilename = "root";
@@ -30,11 +30,12 @@ function deliverXml(filename, response) {
 }
 
 function recordRequestedUri(uri) {
-	requestedUris.push(uri);
+	requestCountOnUri[uri] = (requestCountOnUri[uri] || 0) + 1;
 }
 
 module.exports = {
 	start: function (port) {
+		requestCountOnUri = [];
 		server.listen(port || PLEX_SERVER_PORT);
 	},
 
@@ -44,7 +45,11 @@ module.exports = {
 
 	uri: function(uri) {
 		return {
-			requested: typeof requestedUris[uri] !== undefined
-		}
+			requested: requestCountOnUri[uri] !== undefined
+		};
+	},
+
+	requests: function() {
+		return requestCountOnUri;
 	}
 };
