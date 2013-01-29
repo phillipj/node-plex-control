@@ -10,13 +10,13 @@ var server = http.createServer(function(req, res) {
 
 	recordRequestedUri(req.url);
 
-	if (req.url === "/library/sections/1/refresh") {
-		res.writeHead(200);
-		return res.end();
-	} else if (req.url === "/library/sections") {
+ 	if (req.url === "/library/sections") {
 		sampleFilename = "library_sections";
 	}  else if (req.url === "/clients") { 
 		sampleFilename = "clients";
+	} else {
+		res.writeHead(200);
+		return res.end();
 	}
 
 	deliverXml(sampleFilename, res);
