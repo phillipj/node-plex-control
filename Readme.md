@@ -1,6 +1,6 @@
 **Work in progress, not released yet!**
 
-# plex-control
+# plex-control [![Build Status](https://api.travis-ci.org/phillipj/node-plex-control.png)](http://travis-ci.org/phillipj/node-plex-control)
 
 Module simplifying the controlling of Plex clients. Utilises the Plex Media Server HTTP API.
 
