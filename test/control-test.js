@@ -27,7 +27,7 @@ buster.testCase("Module API", {
 		assert.equals(this.control.constructor.name, "PlexControl");
 	},
 
-	"should require server host as first parameter": function() {
+	"// should require server host as first parameter": function() {
 		assert.exception(function() {
 			new PlexControl();
 		}, "TypeError");
