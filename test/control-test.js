@@ -127,6 +127,14 @@ buster.testCase("Module API", {
 			});
 		},
 
+		"should store client's IP address in the clientAddress-property of the PlexControl instance": function(done) {
+			var self = this;
+			this.control.setClient(CLIENT_NAME, function(err, resolvedIp) {
+				assert.equals(resolvedIp, self.control.clientAddress);
+				done();
+			});
+		},
+
 		"should not resolve IP address when first argument already is a valid IP": function(done) {
 			this.control.setClient(CLIENT_ADDRESS, function(err, resolvedIp) {
 				refute(server.uri("/clients").requested);
