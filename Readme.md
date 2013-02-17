@@ -2,7 +2,50 @@
 
 # plex-control [![Build Status](https://api.travis-ci.org/phillipj/node-plex-control.png)](http://travis-ci.org/phillipj/node-plex-control)
 
-Module simplifying the controlling of Plex clients. Utilises the Plex Media Server HTTP API.
+Module simplifying the controlling of Plex clients. Utilises the Plex Media Server HTTP API/Control.
+
+## Usage
+
+```js
+var PlexControl = require("plex-control");
+var control = PlexControl("192.168.0.2", "");
+
+```
+
+### Commands
+
+The commands are pretty much self describing and identical to what the HTTP API offers. Each command will invoke given callback with an **error**-argument signaling any errors which may have occured when communicating with the HTTP API.
+
+**Navigation**
+```js
+control.navigation.moveUp(callback);
+control.navigation.moveDown(callback);
+control.navigation.moveLeft(callback);
+control.navigation.moveRight(callback);
+control.navigation.pageUp(callback);
+control.navigation.pageDown(callback);
+control.navigation.nextLetter(callback);
+control.navigation.previousLetter(callback);
+control.navigation.select(callback);
+control.navigation.back(callback);
+control.navigation.contextMenu(callback);
+control.navigation.toggleOSD(callback);
+```
+
+**Playback**
+```js
+control.playback.play(callback);
+control.playback.pause(callback);
+control.playback.stop(callback);
+control.playback.rewind(callback);
+control.playback.fastForward(callback);
+control.playback.stepForward(callback);
+control.playback.bigStepForward(callback);
+control.playback.stepBack(callback);
+control.playback.bigStepBack(callback);
+control.playback.skipNext(callback);
+control.playback.skipPrevious(callback);
+```
 
 ## License
 (The MIT License)
