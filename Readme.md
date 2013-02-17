@@ -8,7 +8,7 @@ Module simplifying the controlling of Plex clients. Utilises the Plex Media Serv
 
 ```js
 var PlexControl = require("plex-control");
-var control = PlexControl("192.168.0.2", "");
+var control = new PlexControl("192.168.0.2", "mac-mini");
 
 ```
 
