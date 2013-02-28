@@ -8,8 +8,13 @@ Module simplifying the controlling of Plex clients. Utilises the Plex Media Serv
 
 ```js
 var PlexControl = require("plex-control");
-var control = new PlexControl("192.168.0.2", "mac-mini");
 
+// having Plex Media Server on 192.168.0.1
+// and client wanting to control with hostname "mac-mini"
+var control = new PlexControl("192.168.0.1", "mac-mini");
+
+// ..or assigning client by IP address
+control = new PlexControl("192.168.0.1", "192.168.0.2");
 ```
 
 ### Commands
