@@ -135,9 +135,26 @@ buster.testCase("Module API", {
 			});
 		},
 
+		"should emit the resolved-event when client's IP address has been resolved": function(done) {
+			var self = this;
+			var resolvedSpy = this.spy();
+
+			this.control.on("resolved", resolvedSpy);
+
+			this.control.setClient(CLIENT_NAME, function(err, resolvedIp) {
+				assert.called(resolvedSpy);
+				done();
+			});
+		},
+
 		"should not resolve IP address when first argument already is a valid IP": function(done) {
+			var resolvedSpy = this.spy();
+
+			this.control.on("resolved", resolvedSpy);
+
 			this.control.setClient(CLIENT_ADDRESS, function(err, resolvedIp) {
 				refute(server.uri("/clients").requested);
+				assert.called(resolvedSpy);
 				done();
 			});
 		}
