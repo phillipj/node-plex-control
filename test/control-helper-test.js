@@ -1,5 +1,5 @@
 var buster = require("buster");
-var server = require("./server");
+var server = require("./lib/server");
 var helper = require("../lib/control-helper");
 
 var SERVER_HOST = "localhost";

@@ -3,7 +3,6 @@ var config = module.exports;
 config["Plex Control tests"] = {
 	env: "node",
 	rootPath: "../",
-	tests: [
-		"test/*-test.js"
-	]
+	libs: ["test/lib/**/*.js"],
+	tests: ["test/**/*-test.js"]
 };

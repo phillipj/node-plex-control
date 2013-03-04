@@ -1,5 +1,5 @@
 var buster = require("buster");
-var server = require("./server");
+var server = require("./lib/server");
 
 var SERVER_HOST = "localhost";
 var CLIENT_NAME = "mac-mini";
