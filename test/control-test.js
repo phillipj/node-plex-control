@@ -5,7 +5,7 @@ var SERVER_HOST = "localhost";
 var CLIENT_NAME = "mac-mini";
 var CLIENT_ADDRESS = "192.168.0.2";
 
-var PlexControl = require("..");
+var PlexControl = require("..").PlexControl;
 
 buster.testCase("Module API", {
 	setUp: function() {

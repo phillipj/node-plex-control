@@ -4,7 +4,7 @@ var server = require("./server");
 var SERVER_HOST = "localhost";
 var CLIENT_HOST = "192.168.0.2";
 
-var PlexControl = require("..");
+var PlexControl = require("..").PlexControl;
 
 function assertRequested(relativeUri) {
 	assert(server.uri("/system/players/"+CLIENT_HOST+"/playback/" + relativeUri).requested);

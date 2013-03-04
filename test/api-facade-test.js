@@ -6,7 +6,7 @@ var SERVER_HOST = "localhost";
 var CLIENT_HOST = "192.168.0.2";
 var CLIENT_NAME = "mac-mini";
 
-var PlexControl = require("..");
+var PlexControl = require("..").PlexControl;
 
 var control;
 
