@@ -1,13 +1,11 @@
-**Work in progress, not released yet!**
-
 # plex-control [![Build Status](https://api.travis-ci.org/phillipj/node-plex-control.png)](http://travis-ci.org/phillipj/node-plex-control)
 
-Module simplifying the controlling of Plex clients. Utilises the Plex Media Server HTTP API/Control.
+Node module used to control Plex clients. Utilises the Plex Media Server HTTP API/Control.
 
 ## Usage
 
 ```js
-var PlexControl = require("plex-control");
+var PlexControl = require("plex-control").PlexControl;
 
 // having Plex Media Server on 192.168.0.1
 // and client wanting to control with hostname "mac-mini"
