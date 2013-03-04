@@ -1,6 +1,6 @@
 var buster = require("buster");
 var server = require("./server");
-var facade = require("../lib/api-facade");
+var helper = require("../lib/control-helper");
 
 var SERVER_HOST = "localhost";
 var CLIENT_HOST = "192.168.0.2";
@@ -26,18 +26,18 @@ buster.testCase("API Facade", {
 		} catch (ignoredException) {}
 	},
 
-	"extensionHelperForControl()": {
+	"extensionHelper()": {
 		setUp: function() {
-			this.helper = facade.extensionHelperForControl(control);
+			this.helper = helper.extensionHelper(control);
 		},
 
 		"exposed as function": function() {
-			assert.isFunction(facade.extensionHelperForControl);
+			assert.isFunction(helper.extensionHelper);
 		},
 
 		"requires control instance as first parameter": function() {
 			assert.exception(function() {
-				facade.extensionHelperForControl();
+				helper.extensionHelper();
 			}, "TypeError");
 		},
 	
