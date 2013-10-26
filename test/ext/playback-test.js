@@ -33,7 +33,7 @@ buster.testCase("Playback", {
 		});
 	},
 
-	"pause() should request /system/players/<IP>/playback/play": function(done) {
+	"pause() should request /system/players/<IP>/playback/pause": function(done) {
 		this.control.playback.pause(function(err) {
 			assertRequested("pause");
 			done();
