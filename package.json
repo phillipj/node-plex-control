@@ -1,6 +1,6 @@
 {
   "name": "plex-control",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Controlling Plex clients through the Plex Media Server HTTP API",
   "main": "lib/control.js",
   "dependencies": {
