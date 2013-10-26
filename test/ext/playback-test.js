@@ -34,8 +34,8 @@ buster.testCase("Playback", {
 	},
 
 	"pause() should request /system/players/<IP>/playback/play": function(done) {
-		this.control.playback.play(function(err) {
-			assertRequested("play");
+		this.control.playback.pause(function(err) {
+			assertRequested("pause");
 			done();
 		});
 	},
