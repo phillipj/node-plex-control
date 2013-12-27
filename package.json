@@ -10,7 +10,8 @@
   },
   "devDependencies": {
     "expect.js": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "sinon": "*"
   },
   "scripts": {
     "test": "make test"
