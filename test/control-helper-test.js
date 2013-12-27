@@ -1,4 +1,4 @@
-var buster = require("buster");
+var expect = require("expect.js");
 var server = require("./lib/server");
 var helper = require("../lib/control-helper");
 
@@ -8,46 +8,46 @@ var CLIENT_NAME = "mac-mini";
 
 var PlexControl = require("..").PlexControl;
 
-var control;
-
 function isUriRequested(relativeUri) {
 	return server.uri("/system/players/" + CLIENT_HOST + relativeUri).requested;
 }
 
-buster.testCase("API Facade", {
-	setUp: function() {
-		server.start();
+describe("API Facade", function() {
+	var control;
+
+	before(function() {
 		control = new PlexControl(SERVER_HOST, CLIENT_NAME);
-	},
+		server.start();
+	});
 
-	tearDown: function() {
-		try {
-			server.stop();
-		} catch (ignoredException) {}
-	},
+	after(function(done) {
+		server.stop(done);
+	});
 
-	"extensionHelper()": {
-		setUp: function() {
-			this.helper = helper.extensionHelper(control);
-		},
+	describe("extensionHelper()", function() {
+		var extHelper;
 
-		"exposed as function": function() {
-			assert.isFunction(helper.extensionHelper);
-		},
+		beforeEach(function() {
+			extHelper = helper.extensionHelper(control);
+		});
 
-		"requires control instance as first parameter": function() {
-			assert.exception(function() {
+		it("exists", function() {
+			expect(helper.extensionHelper).to.be.a('function');
+		});
+
+		it("requires control instance as first parameter", function() {
+			expect(function() {
 				helper.extensionHelper();
-			}, "TypeError");
-		},
-	
-		"should wait for client to be resolved before performing any API-command": function(done) {
-			this.helper.performOnClient('/navigation/moveUp', function(err) {
-				assert.isTrue(isUriRequested('/navigation/moveUp'));
+			}).to.throwException("TypeError");
+		});
+
+		it("should wait for client to be resolved before performing any API-command", function(done) {
+			extHelper.performOnClient('/navigation/moveUp', function(err) {
+				expect(isUriRequested('/navigation/moveUp')).to.be(true);
 				done();
 			});
 
-			refute.isTrue(isUriRequested('/navigation/moveUp'));
-		}
-	}
+			expect(isUriRequested('/navigation/moveUp')).to.be(false);
+		});
+	});
 });

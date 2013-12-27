@@ -10,9 +10,9 @@ var server = http.createServer(function(req, res) {
 
 	recordRequestedUri(req.url);
 
- 	if (req.url === "/library/sections") {
+	if (req.url === "/library/sections") {
 		sampleFilename = "library_sections";
-	}  else if (req.url === "/clients") { 
+	}  else if (req.url === "/clients") {
 		sampleFilename = "clients";
 	} else {
 		res.writeHead(200);
@@ -20,12 +20,13 @@ var server = http.createServer(function(req, res) {
 	}
 
 	deliverXml(sampleFilename, res);
+}).on('close', function() {
+	server.isOpen = false;
 });
 
 function deliverXml(filename, response) {
 	fs.readFile("test/samples/"+ filename +".xml", function(err, content) {
-		response.write(content);
-		response.end();
+		response.end(content);
 	});
 }
 
@@ -34,13 +35,19 @@ function recordRequestedUri(uri) {
 }
 
 module.exports = {
-	start: function (port) {
+	start: function () {
 		requestCountOnUri = [];
-		server.listen(port || PLEX_SERVER_PORT);
+		server.listen(PLEX_SERVER_PORT, function() {
+			server.isOpen = true;
+		});
 	},
 
-	stop: function() {
-		server.close();
+	stop: function(done) {
+		if (server.isOpen) {
+			server.close(done);
+		} else {
+			done();
+		}
 	},
 
 	uri: function(uri) {

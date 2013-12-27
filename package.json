@@ -6,13 +6,14 @@
   "dependencies": {
     "plex-api": "~0.4.1",
     "validator": "0.4.x",
-    "when": "1.8.x"
+    "when": "~2.7.0"
   },
   "devDependencies": {
-    "buster": "0.6.x"
+    "expect.js": "*",
+    "mocha": "*"
   },
   "scripts": {
-    "test": "node_modules/buster/bin/buster test"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
