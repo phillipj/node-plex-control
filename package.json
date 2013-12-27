@@ -4,7 +4,7 @@
   "description": "Controlling Plex clients through the Plex Media Server HTTP API",
   "main": "lib/control.js",
   "dependencies": {
-    "plex-api": "0.2.x",
+    "plex-api": "~0.4.1",
     "validator": "0.4.x",
     "when": "1.8.x"
   },
