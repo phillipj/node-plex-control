@@ -41,13 +41,46 @@ describe("API Facade", function() {
 			}).to.throwException("TypeError");
 		});
 
-		it("should wait for client to be resolved before performing any API-command", function(done) {
-			extHelper.performOnClient('/navigation/moveUp').then(function() {
-				expect(isUriRequested('/navigation/moveUp')).to.be(true);
-				done();
+		describe("performOnClient()", function() {
+			it("should wait for client to be resolved before performing any API-command", function(done) {
+				extHelper.performOnClient('/navigation/moveUp').then(function() {
+					expect(isUriRequested('/navigation/moveUp')).to.be(true);
+					done();
+				});
+
+				expect(isUriRequested('/navigation/moveUp')).to.be(false);
+			});
+		});
+
+		describe("actionPrefix()", function() {
+			it("should return a function wrapping performOnClient() which takes action name as parameter", function(done) {
+				var actionPrefixFn = extHelper.actionPrefix("/navigation");
+
+				actionPrefixFn("moveUp")().then(function() {
+					expect(isUriRequested('/navigation/moveUp')).to.be(true);
+					done();
+				});
+			});
+		});
+
+		describe("createApiFromActions()", function() {
+			it("should map array of strings into object with each string as key", function() {
+				var noop = function() {};
+
+				var createdApi = extHelper.createApiFromActions(noop, ["moveUp", "moveDown"]);
+
+				expect(createdApi).to.be.an('object');
+				expect(Object.keys(createdApi).length).to.be(2);
 			});
 
-			expect(isUriRequested('/navigation/moveUp')).to.be(false);
+			it("should create object with values created by function given as first argument", function() {
+				var returnsActionName = function(action) { return action; };
+
+				var createdApi = extHelper.createApiFromActions(returnsActionName, ["moveUp", "moveDown"]);
+
+				expect(createdApi["moveUp"]).to.be("moveUp");
+				expect(createdApi["moveDown"]).to.be("moveDown");
+			});
 		});
 	});
 });
