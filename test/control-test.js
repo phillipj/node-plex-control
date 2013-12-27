@@ -46,21 +46,21 @@ describe("Module API", function(done) {
 		});
 
 		it("should request API resource /clients", function(done) {
-			control.getClients(function(err, clients) {
+			control.getClients().then(function(clients) {
 				expect(server.uri("/clients").requested).to.be(true);
 				done();
 			});
 		});
 
 		it("should retrieve available Plex clients from API", function(done) {
-			control.getClients(function(err, clients) {
+			control.getClients().then(function(clients) {
 				expect(clients.length).to.be(2);
 				done();
 			});
 		});
 
 		it("should flatten clients objects recieved from the API by having the attributes directly onto the object", function(done) {
-			control.getClients(function(err, clients) {
+			control.getClients().then(function(clients) {
 				expect(clients[1].name).to.be(CLIENT_NAME);
 				done();
 			});
@@ -78,24 +78,26 @@ describe("Module API", function(done) {
 			}).to.throwException("TypeError");
 		});
 
-		it("should provide an error object as first callback argument when an error occurs", function(done) {
+		it("should reject promise when an error occurs", function(done) {
 			server.stop(function() {
-				control.getClientByName(CLIENT_NAME, function(err) {
+
+				control.getClientByName(CLIENT_NAME).catch(function(err) {
 					expect(err).not.to.be(null);
 					done();
 				});
+
 			});
 		});
 
-		it("should not provide any second callback argument when client could not be found", function(done) {
-			control.getClientByName("nonexistent-client", function(err, client) {
+		it("should resolve promise with undefined when client could not be found", function(done) {
+			control.getClientByName("nonexistent-client").then(function(client) {
 				expect(client).to.be(undefined);
 				done();
 			});
 		});
 
-		it("should provide client matched by name-attribute from the API", function(done) {
-			control.getClientByName(CLIENT_NAME, function(err, client) {
+		it("should resolve promise with client matched by name-attribute from the API", function(done) {
+			control.getClientByName(CLIENT_NAME).then(function(client) {
 				expect(client.name).to.be(CLIENT_NAME);
 				expect(client.address).to.be(CLIENT_ADDRESS);
 				done();
@@ -114,24 +116,26 @@ describe("Module API", function(done) {
 			}).to.throwException("TypeError");
 		});
 
-		it("should provide an error object as first callback argument when an error occurs", function(done) {
+		it("should reject promise when an error occurs", function(done) {
 			server.stop(function() {
-				control.setClient(CLIENT_NAME, function(err) {
+
+				control.setClient(CLIENT_NAME).catch(function(err) {
 					expect(err).not.to.be(null);
 					done();
 				});
+
 			});
 		});
 
 		it("should resolve client's IP address when first argument resembles a machine name", function(done) {
-			control.setClient(CLIENT_NAME, function(err, resolvedIp) {
+			control.setClient(CLIENT_NAME).then(function(resolvedIp) {
 				expect(resolvedIp).to.be(CLIENT_ADDRESS);
 				done();
 			});
 		});
 
 		it("should store client's IP address in the clientAddress-property of the PlexControl instance", function(done) {
-			control.setClient(CLIENT_NAME, function(err, resolvedIp) {
+			control.setClient(CLIENT_NAME).then(function(resolvedIp) {
 				expect(resolvedIp).to.be(control.clientAddress);
 				done();
 			});
@@ -142,7 +146,7 @@ describe("Module API", function(done) {
 
 			control.on("resolved", resolvedSpy);
 
-			control.setClient(CLIENT_NAME, function(err, resolvedIp) {
+			control.setClient(CLIENT_NAME).then(function() {
 				expect(resolvedSpy.called).to.be(true);
 				done();
 			});
@@ -153,7 +157,7 @@ describe("Module API", function(done) {
 
 			control.on("resolved", resolvedSpy);
 
-			control.setClient(CLIENT_ADDRESS, function(err, resolvedIp) {
+			control.setClient(CLIENT_ADDRESS).then(function(resolvedIp) {
 				expect(server.uri("/clients").requested).to.be(false);
 				expect(resolvedSpy.called).to.be(true);
 				done();

@@ -42,7 +42,7 @@ describe("API Facade", function() {
 		});
 
 		it("should wait for client to be resolved before performing any API-command", function(done) {
-			extHelper.performOnClient('/navigation/moveUp', function(err) {
+			extHelper.performOnClient('/navigation/moveUp').then(function() {
 				expect(isUriRequested('/navigation/moveUp')).to.be(true);
 				done();
 			});
