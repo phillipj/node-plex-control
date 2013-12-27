@@ -17,38 +17,54 @@ control = new PlexControl("192.168.0.1", "192.168.0.2");
 
 ### Commands
 
-The commands are pretty much self describing and identical to what the HTTP API offers. Each command will invoke given callback with an **error**-argument signaling any errors which may have occured when communicating with the HTTP API.
+The commands are pretty much self describing and identical to what the HTTP API offers.
 
 **Navigation**
 ```js
-control.navigation.moveUp(callback);
-control.navigation.moveDown(callback);
-control.navigation.moveLeft(callback);
-control.navigation.moveRight(callback);
-control.navigation.pageUp(callback);
-control.navigation.pageDown(callback);
-control.navigation.nextLetter(callback);
-control.navigation.previousLetter(callback);
-control.navigation.select(callback);
-control.navigation.back(callback);
-control.navigation.contextMenu(callback);
-control.navigation.toggleOSD(callback);
+control.navigation.moveUp();
+control.navigation.moveDown();
+control.navigation.moveLeft();
+control.navigation.moveRight();
+control.navigation.pageUp();
+control.navigation.pageDown();
+control.navigation.nextLetter();
+control.navigation.previousLetter();
+control.navigation.select();
+control.navigation.back();
+control.navigation.contextMenu();
+control.navigation.toggleOSD();
 ```
 
 **Playback**
 ```js
-control.playback.play(callback);
-control.playback.pause(callback);
-control.playback.stop(callback);
-control.playback.rewind(callback);
-control.playback.fastForward(callback);
-control.playback.stepForward(callback);
-control.playback.bigStepForward(callback);
-control.playback.stepBack(callback);
-control.playback.bigStepBack(callback);
-control.playback.skipNext(callback);
-control.playback.skipPrevious(callback);
+control.playback.play();
+control.playback.pause();
+control.playback.stop();
+control.playback.rewind();
+control.playback.fastForward();
+control.playback.stepForward();
+control.playback.bigStepForward();
+control.playback.stepBack();
+control.playback.bigStepBack();
+control.playback.skipNext();
+control.playback.skipPrevious();
 ```
+
+**Promise based**
+
+Each command returns a promise which gets resolved when command was delivered successfully by the Plex API or rejected when any error occured.
+```js
+control.navigation.moveUp().then(function(){
+	// moveUp was successfully communicated to Plex
+}, function(err){
+	console.err('Error while communicating with HTTP API', err);
+});
+```
+
+## Changelog
+
+### v0.2.0
+- Converted all methods to be promise based, rather than callbacks
 
 ## License
 (The MIT License)
