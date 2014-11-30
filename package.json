@@ -6,7 +6,7 @@
   "dependencies": {
     "plex-api": "~0.4.1",
     "validator": "^3.22.1",
-    "when": "~2.7.0"
+    "when": "^3.6.3"
   },
   "devDependencies": {
     "expect.js": "*",
