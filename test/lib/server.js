@@ -1,62 +1,52 @@
 var http = require("http");
 var fs = require("fs");
 
-var PLEX_SERVER_PORT = 32400;
+function TestServer() {
+	this.requestCountOnUri = {};
+	this.server = createHttpServer(this);
+	this.server.on("request", recordRequestedUri.bind(this));
+}
 
-var requestCountOnUri;
+TestServer.prototype.start = function(port, cb) {
+	this.server.listen(port, cb);
+};
 
-var server = http.createServer(function(req, res) {
-	var sampleFilename = "root";
+TestServer.prototype.requests = function() {
+	return this.requestCountOnUri;
+};
 
-	recordRequestedUri(req.url);
+TestServer.prototype.uri = function(uri) {
+	return {
+		requested: this.requestCountOnUri[uri] !== undefined
+	};
+};
 
-	if (req.url === "/library/sections") {
-		sampleFilename = "library_sections";
-	}  else if (req.url === "/clients") {
-		sampleFilename = "clients";
-	} else {
-		res.writeHead(200);
-		return res.end();
-	}
+TestServer.prototype.stop = function(cb) {
+	this.server.close(cb);
+};
 
-	deliverXml(sampleFilename, res);
-}).on('close', function() {
-	server.isOpen = false;
-});
+function recordRequestedUri(req) {
+	var uri = req.url;
+	this.requestCountOnUri[uri] = (this.requestCountOnUri[uri] || 0) + 1;
+}
 
-function deliverXml(filename, response) {
-	fs.readFile("test/samples/"+ filename +".xml", function(err, content) {
-		response.end(content);
+function createHttpServer(serverWrapper) {
+	return http.createServer(function(req, res) {
+		var sampleFilename = "root";
+
+		if (req.url === "/library/sections") {
+			sampleFilename = "library_sections";
+		}  else if (req.url === "/clients") {
+			sampleFilename = "clients";
+		} else {
+			res.writeHead(200);
+			return res.end();
+		}
+
+		fs.createReadStream("test/samples/"+ sampleFilename +".xml").pipe(res);
+	}).on("error", function(err){
+		console.error("Error from the test server:", err.stack);
 	});
 }
 
-function recordRequestedUri(uri) {
-	requestCountOnUri[uri] = (requestCountOnUri[uri] || 0) + 1;
-}
-
-module.exports = {
-	start: function () {
-		requestCountOnUri = [];
-		server.listen(PLEX_SERVER_PORT, function() {
-			server.isOpen = true;
-		});
-	},
-
-	stop: function(done) {
-		if (server.isOpen) {
-			server.close(done);
-		} else {
-			done();
-		}
-	},
-
-	uri: function(uri) {
-		return {
-			requested: requestCountOnUri[uri] !== undefined
-		};
-	},
-
-	requests: function() {
-		return requestCountOnUri;
-	}
-};
+module.exports = TestServer;

@@ -1,21 +1,19 @@
 var expect = require("expect.js");
-var server = require("../lib/server");
+
+var TestServer = require("../lib/server");
 
 var SERVER_HOST = "localhost";
 var CLIENT_HOST = "192.168.0.2";
 
 var PlexControl = require("../..").PlexControl;
 
-function assertRequested(relativeUri) {
-	expect(server.uri("/system/players/"+CLIENT_HOST+"/navigation/" + relativeUri).requested).to.be(true);
-}
-
 describe("Navigation", function() {
 	var control;
+	var server = new TestServer();
 
-	before(function() {
-		control = new PlexControl(SERVER_HOST, CLIENT_HOST);
-		server.start();
+	before(function(done) {
+		control = new PlexControl(SERVER_HOST, CLIENT_HOST, 32402);
+		server.start(32402, done);
 	});
 
 	after(function(done) {
@@ -26,87 +24,80 @@ describe("Navigation", function() {
 		expect(control.navigation).to.be.an('object');
 	});
 
-	it("moveUp() should request /system/players/<IP>/navigation/moveUp", function(done) {
-		control.navigation.moveUp().then(function() {
+	it("moveUp() should request /system/players/<IP>/navigation/moveUp", function() {
+		return control.navigation.moveUp().then(function() {
 			assertRequested("moveUp");
-			done();
 		});
 	});
 
-	it("moveDown() should request /system/players/<IP>/navigation/moveDown", function(done) {
-		control.navigation.moveDown().then(function() {
+	it("moveDown() should request /system/players/<IP>/navigation/moveDown", function() {
+		return control.navigation.moveDown().then(function() {
 			assertRequested("moveDown");
-			done();
 		});
 	});
 
-	it("moveLeft() should request /system/players/<IP>/navigation/moveLeft", function(done) {
-		control.navigation.moveLeft().then(function() {
+	it("moveLeft() should request /system/players/<IP>/navigation/moveLeft", function() {
+		return control.navigation.moveLeft().then(function() {
 			assertRequested("moveLeft");
-			done();
 		});
 	});
 
-	it("moveRight() should request /system/players/<IP>/navigation/moveRight", function(done) {
-		control.navigation.moveRight().then(function() {
+	it("moveRight() should request /system/players/<IP>/navigation/moveRight", function() {
+		return control.navigation.moveRight().then(function() {
 			assertRequested("moveRight");
-			done();
 		});
 	});
 
-	it("pageUp() should request /system/players/<IP>/navigation/pageUp", function(done) {
-		control.navigation.pageUp().then(function() {
+	it("pageUp() should request /system/players/<IP>/navigation/pageUp", function() {
+		return control.navigation.pageUp().then(function() {
 			assertRequested("pageUp");
-			done();
 		});
 	});
 
-	it("pageDown() should request /system/players/<IP>/navigation/pageDown", function(done) {
-		control.navigation.pageDown().then(function() {
+	it("pageDown() should request /system/players/<IP>/navigation/pageDown", function() {
+		return control.navigation.pageDown().then(function() {
 			assertRequested("pageDown");
-			done();
 		});
 	});
 
-	it("nextLetter() should request /system/players/<IP>/navigation/nextLetter", function(done) {
-		control.navigation.nextLetter().then(function() {
+	it("nextLetter() should request /system/players/<IP>/navigation/nextLetter", function() {
+		return control.navigation.nextLetter().then(function() {
 			assertRequested("nextLetter");
-			done();
 		});
 	});
 
-	it("previousLetter() should request /system/players/<IP>/navigation/previousLetter", function(done) {
-		control.navigation.previousLetter().then(function() {
+	it("previousLetter() should request /system/players/<IP>/navigation/previousLetter", function() {
+		return control.navigation.previousLetter().then(function() {
 			assertRequested("previousLetter");
-			done();
 		});
 	});
 
-	it("select() should request /system/players/<IP>/navigation/select", function(done) {
-		control.navigation.select().then(function() {
+	it("select() should request /system/players/<IP>/navigation/select", function() {
+		return control.navigation.select().then(function() {
 			assertRequested("select");
-			done();
 		});
 	});
 
-	it("back() should request /system/players/<IP>/navigation/back", function(done) {
-		control.navigation.back().then(function() {
+	it("back() should request /system/players/<IP>/navigation/back", function() {
+		return control.navigation.back().then(function() {
 			assertRequested("back");
-			done();
 		});
 	});
 
-	it("contextMenu() should request /system/players/<IP>/navigation/contextMenu", function(done) {
-		control.navigation.contextMenu().then(function() {
+	it("contextMenu() should request /system/players/<IP>/navigation/contextMenu", function() {
+		return control.navigation.contextMenu().then(function() {
 			assertRequested("contextMenu");
-			done();
 		});
 	});
 
-	it("toggleOSD() should request /system/players/<IP>/navigation/toggleOSD", function(done) {
-		control.navigation.toggleOSD().then(function() {
+	it("toggleOSD() should request /system/players/<IP>/navigation/toggleOSD", function() {
+		return control.navigation.toggleOSD().then(function() {
 			assertRequested("toggleOSD");
-			done();
 		});
 	});
+
+	function assertRequested(relativeUri) {
+		expect(server.uri("/system/players/"+CLIENT_HOST+"/navigation/" + relativeUri).requested).to.be(true);
+	}
+
 });
