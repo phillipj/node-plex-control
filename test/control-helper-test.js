@@ -15,9 +15,9 @@ describe("API Facade", function() {
 	var server = new TestServer();
 
 	before(function(done) {
-		control = new PlexControl(SERVER_HOST, CLIENT_NAME, 32403);
+		control = new PlexControl(SERVER_HOST, CLIENT_NAME);
 		extHelper = helper.extensionHelper(control);
-		server.start(32403, done);
+		server.start(done);
 	});
 
 	after(function(done) {

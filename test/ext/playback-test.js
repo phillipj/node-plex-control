@@ -12,8 +12,8 @@ describe("Playback", function() {
 	var server = new TestServer();
 
 	before(function(done) {
-		control = new PlexControl(SERVER_HOST, CLIENT_HOST, 32401);
-		server.start(32401, done);
+		control = new PlexControl(SERVER_HOST, CLIENT_HOST);
+		server.start(done);
 	});
 
 	after(function(done) {

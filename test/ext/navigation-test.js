@@ -12,8 +12,8 @@ describe("Navigation", function() {
 	var server = new TestServer();
 
 	before(function(done) {
-		control = new PlexControl(SERVER_HOST, CLIENT_HOST, 32402);
-		server.start(32402, done);
+		control = new PlexControl(SERVER_HOST, CLIENT_HOST);
+		server.start(done);
 	});
 
 	after(function(done) {

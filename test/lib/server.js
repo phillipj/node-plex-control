@@ -1,14 +1,16 @@
 var http = require("http");
 var fs = require("fs");
 
+var PLEX_SERVER_PORT = 32400;
+
 function TestServer() {
 	this.requestCountOnUri = {};
 	this.server = createHttpServer(this);
 	this.server.on("request", recordRequestedUri.bind(this));
 }
 
-TestServer.prototype.start = function(port, cb) {
-	this.server.listen(port, cb);
+TestServer.prototype.start = function(cb) {
+	this.server.listen(PLEX_SERVER_PORT, cb);
 };
 
 TestServer.prototype.requests = function() {

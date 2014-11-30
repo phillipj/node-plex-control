@@ -15,7 +15,7 @@ describe("Module API", function(done) {
 
 	before(function(done) {
 		control = new PlexControl(SERVER_HOST, CLIENT_NAME);
-		server.start(32400, done);
+		server.start(done);
 	});
 
 	after(function(done) {
@@ -83,7 +83,7 @@ describe("Module API", function(done) {
 				control.getClientInfo(CLIENT_NAME).catch(function(err) {
 					expect(err).not.to.be(null);
 
-					server.start(32400, done);
+					server.start(done);
 				});
 
 			});
@@ -120,7 +120,7 @@ describe("Module API", function(done) {
 				control.setClient(CLIENT_NAME).catch(function(err) {
 					expect(err).not.to.be(null);
 
-					server.start(32400, done);
+					server.start(done);
 				});
 
 			});
