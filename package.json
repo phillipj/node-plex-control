@@ -5,7 +5,7 @@
   "main": "lib/control.js",
   "dependencies": {
     "plex-api": "~0.4.1",
-    "validator": "0.4.x",
+    "validator": "^3.22.1",
     "when": "~2.7.0"
   },
   "devDependencies": {

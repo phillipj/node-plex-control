@@ -67,21 +67,21 @@ describe("Module API", function(done) {
 		});
 	});
 
-	describe("getClientByName()", function() {
+	describe("getClientInfo()", function() {
 		it("exists", function() {
-			expect(control.getClientByName).to.be.a('function');
+			expect(control.getClientInfo).to.be.a('function');
 		});
 
 		it("requires client name as first argument", function() {
 			expect(function() {
-				control.getClientByName();
+				control.getClientInfo();
 			}).to.throwException("TypeError");
 		});
 
 		it("should reject promise when an error occurs", function(done) {
 			server.stop(function() {
 
-				control.getClientByName(CLIENT_NAME).catch(function(err) {
+				control.getClientInfo(CLIENT_NAME).catch(function(err) {
 					expect(err).not.to.be(null);
 					done();
 				});
@@ -90,14 +90,14 @@ describe("Module API", function(done) {
 		});
 
 		it("should resolve promise with undefined when client could not be found", function(done) {
-			control.getClientByName("nonexistent-client").then(function(client) {
+			control.getClientInfo("nonexistent-client").then(function(client) {
 				expect(client).to.be(undefined);
 				done();
 			});
 		});
 
 		it("should resolve promise with client matched by name-attribute from the API", function(done) {
-			control.getClientByName(CLIENT_NAME).then(function(client) {
+			control.getClientInfo(CLIENT_NAME).then(function(client) {
 				expect(client.name).to.be(CLIENT_NAME);
 				expect(client.address).to.be(CLIENT_ADDRESS);
 				done();
@@ -134,9 +134,9 @@ describe("Module API", function(done) {
 			});
 		});
 
-		it("should store client's IP address in the clientAddress-property of the PlexControl instance", function(done) {
+		it("should store client's IP address in the client.address-property of the PlexControl instance", function(done) {
 			control.setClient(CLIENT_NAME).then(function(resolvedIp) {
-				expect(resolvedIp).to.be(control.clientAddress);
+				expect(resolvedIp).to.be(control.client.address);
 				done();
 			});
 		});
@@ -152,16 +152,5 @@ describe("Module API", function(done) {
 			});
 		});
 
-		it("should not resolve IP address when first argument already is a valid IP", function(done) {
-			var resolvedSpy = sinon.spy();
-
-			control.on("resolved", resolvedSpy);
-
-			control.setClient(CLIENT_ADDRESS).then(function(resolvedIp) {
-				expect(server.uri("/clients").requested).to.be(false);
-				expect(resolvedSpy.called).to.be(true);
-				done();
-			});
-		});
 	});
 });
