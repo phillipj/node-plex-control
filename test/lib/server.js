@@ -22,7 +22,8 @@ TestServer.prototype.uri = function(uri) {
 };
 
 TestServer.prototype.stop = function(cb) {
-	this.server.close(cb);
+	// got alot of ECONNRESET issues without this timeout :(
+	setTimeout(this.server.close.bind(this.server, cb), 10);
 };
 
 function recordRequestedUri(req) {
