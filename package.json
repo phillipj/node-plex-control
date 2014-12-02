@@ -15,8 +15,8 @@
     "sinon": "*"
   },
   "scripts": {
-    "test": "mocha test/*",
-    "test-tdd": "mocha -w test/*"
+    "test": "mocha test/bootstrapTests.js test/**/*-test.js",
+    "test-tdd": "mocha -w test/bootstrapTests.js test/**/*-test.js"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 var expect = require("expect.js");
 
-var TestServer = require("../lib/server");
+var server = require("../test-lib/server");
 
 var SERVER_HOST = "localhost";
 var CLIENT_HOST = "192.168.0.2";
@@ -9,15 +9,9 @@ var PlexControl = require("../..").PlexControl;
 
 describe("Playback", function() {
 	var control;
-	var server = new TestServer();
 
-	before(function(done) {
+	before(function() {
 		control = new PlexControl(SERVER_HOST, CLIENT_HOST);
-		server.start(done);
-	});
-
-	after(function(done) {
-		server.stop(done);
 	});
 
 	it("module exposes playback object", function() {

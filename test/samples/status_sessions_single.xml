@@ -1,0 +1,11 @@
+<MediaContainer size="1">
+        <Track addedAt="1396406847" art="/library/metadata/780/art/1396406868" duration="217782" grandparentKey="/library/metadata/780" grandparentRatingKey="780" grandparentThumb="/library/metadata/780/thumb/1396406868" grandparentTitle="Steve Miller" guid="local://781/8" index="8" key="/library/metadata/782" librarySectionID="3" originalTitle="Steve Miller Band" parentIndex="1" parentKey="/library/metadata/781" parentRatingKey="781" parentThumb="/library/metadata/781/thumb/1396406871" parentTitle="Greatest Hits 1974-78" ratingKey="782" sessionKey="1" summary="" thumb="/library/metadata/781/thumb/1396406871" title="The Joker" titleSort="Joker" type="track" updatedAt="1396406870" viewOffset="48550">
+                <Media audioChannels="2" audioCodec="mp3" bitrate="320" container="mp3" duration="217782" id="759">
+                        <Part container="mp3" duration="217782" file="C:\Music\Steve Miller Band\Greatest Hits 1974-78\08 - The Joker.mp3" id="763" key="/library/parts/763/file.mp3" size="8752767">
+                                <Stream bitrate="320" bitrateMode="cbr" channels="2" codec="mp3" duration="217782" id="8344" index="0" samplingRate="44100" selected="1" streamType="2" title=""/>
+                        </Part>
+                </Media>
+                <User id="1" thumb="http://www.gravatar.com/avatar/57ddfffd0c28b16997abce76964b5c03?d=404" title="JBurlison@Gmail.com"/>
+                <Player machineIdentifier="66f7da38" platform="Android" product="Plex for Android" state="playing" title="My SM-N900P"/>
+        </Track>
+</MediaContainer>

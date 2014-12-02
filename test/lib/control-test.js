@@ -1,25 +1,19 @@
 var expect = require("expect.js");
 var sinon = require("sinon");
 
-var TestServer = require("./lib/server");
+var server = require("../test-lib/server");
 
 var SERVER_HOST = "localhost";
 var CLIENT_NAME = "mac-mini";
 var CLIENT_ADDRESS = "192.168.0.2";
 
-var PlexControl = require("..").PlexControl;
+var PlexControl = require("../..").PlexControl;
 
 describe("Module API", function(done) {
 	var control;
-	var server = new TestServer();
 
-	before(function(done) {
+	before(function() {
 		control = new PlexControl(SERVER_HOST, CLIENT_NAME);
-		server.start(done);
-	});
-
-	after(function(done) {
-		server.stop(done);
 	});
 
 	it("exposes constructor", function() {
@@ -48,19 +42,19 @@ describe("Module API", function(done) {
 		});
 
 		it("should request API resource /clients", function() {
-			return control.getClients().done(function(clients) {
+			return control.getClients().then(function(clients) {
 				expect(server.uri("/clients").requested).to.be(true);
 			});
 		});
 
 		it("should retrieve available Plex clients from API", function() {
-			return control.getClients().done(function(clients) {
+			return control.getClients().then(function(clients) {
 				expect(clients.length).to.be(2);
 			});
 		});
 
 		it("should flatten clients objects recieved from the API by having the attributes directly onto the object", function() {
-			return control.getClients().done(function(clients) {
+			return control.getClients().then(function(clients) {
 				expect(clients[1].name).to.be(CLIENT_NAME);
 			});
 		});
@@ -90,22 +84,67 @@ describe("Module API", function(done) {
 		});
 
 		it("should resolve promise with undefined when client could not be found", function() {
-			return control.getClientInfo("nonexistent-client").done(function(client) {
+			return control.getClientInfo("nonexistent-client").then(function(client) {
 				expect(client).to.be(undefined);
 			});
 		});
 
 		it("should resolve promise with client matched by name-attribute from the API", function() {
-			return control.getClientInfo(CLIENT_NAME).done(function(client) {
+			return control.getClientInfo(CLIENT_NAME).then(function(client) {
 				expect(client.name).to.be(CLIENT_NAME);
 				expect(client.address).to.be(CLIENT_ADDRESS);
 			});
 		});
 	});
 
+	describe("getSessions()", function() {
+
+		it("exists", function() {
+			expect(control.getSessions).to.be.a("function");
+		});
+
+		it("requires client to already have been set", function() {
+			var origClient = control.client;
+			delete control.client;
+
+			expect(function() {
+				control.getSessions();
+			}).to.throwException("Error");
+
+			control.client = origClient;
+		});
+
+		it("should return a promise resolving to an object", function() {
+			return control.getSessions().then(function(sessions){
+				expect(sessions).to.be.an("object");
+			});
+		});
+
+		it("should have a photo-property in returned object when client has a photo session", function() {
+			return control.getSessions().then(function(sessions){
+				expect(sessions).to.have.property("photo");
+				expect(sessions.photo.attributes.title).to.be("SmDM0fZ");
+			});
+		});
+
+		it("should have a video-property in returned object when client has a video session", function() {
+			return control.getSessions().then(function(sessions){
+				expect(sessions).to.have.property("video");
+				expect(sessions.video.attributes.title).to.be("Pilot");
+			});
+		});
+
+		it("should not have a track-property in returned object when client doesnt have a track session", function() {
+			return control.getSessions().then(function(sessions){
+				expect(sessions).to.not.have.property("track");
+			});
+		});
+
+	});
+
 	describe("setClient()", function() {
 		it("exists", function() {
-			expect(control.setClient).to.be.a('function');
+			expect(control.setClient).to.be.a("function");
 		});
 
 		it("requires client IP or name as first argument", function() {
@@ -126,15 +165,9 @@ describe("Module API", function(done) {
 			});
 		});
 
-		it("should resolve client's IP address when first argument resembles a machine name", function() {
-			return control.setClient(CLIENT_NAME).done(function(resolvedIp) {
-				expect(resolvedIp).to.be(CLIENT_ADDRESS);
-			});
-		});
-
-		it("should store client's IP address in the client.address-property of the PlexControl instance", function() {
-			return control.setClient(CLIENT_NAME).done(function(resolvedIp) {
-				expect(resolvedIp).to.be(control.client.address);
+		it("should store resolved client in the .client-property of the PlexControl instance", function() {
+			return control.setClient(CLIENT_NAME).then(function(resolvedClient) {
+				expect(resolvedClient.address).to.be(control.client.address);
 			});
 		});
 
@@ -143,7 +176,7 @@ describe("Module API", function(done) {
 
 			control.on("resolved", resolvedSpy);
 
-			return control.setClient(CLIENT_NAME).done(function() {
+			return control.setClient(CLIENT_NAME).then(function() {
 				expect(resolvedSpy.called).to.be(true);
 			});
 		});

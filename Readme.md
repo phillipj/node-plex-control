@@ -17,6 +17,17 @@ control = new PlexControl("192.168.0.1", "192.168.0.2");
 
 ### Commands
 
+**Promise based**
+
+Each command returns a promise which gets resolved when command was delivered successfully by the Plex API or rejected when any error occured.
+```js
+control.navigation.moveUp().then(function(){
+	// moveUp was successfully communicated to Plex
+}, function(err){
+	console.err('Error while communicating with HTTP API', err);
+});
+```
+
 The commands are pretty much self describing and identical to what the HTTP API offers.
 
 **Navigation**
@@ -50,18 +61,36 @@ control.playback.skipNext();
 control.playback.skipPrevious();
 ```
 
-**Promise based**
+**Currently**
 
-Each command returns a promise which gets resolved when command was delivered successfully by the Plex API or rejected when any error occured.
+What's currently happing on the client?
+
 ```js
-control.navigation.moveUp().then(function(){
-	// moveUp was successfully communicated to Plex
-}, function(err){
-	console.err('Error while communicating with HTTP API', err);
+control.currently.playing();
+control.currently.paused();
+```
+
+It resolves to an object representing what's currently playing/paused. The object has lots of details about the given media. Hints of what's available in these gigantic detailed media representations can be found on the XML example on the [StatusSessions page in the unofficial Plex API documentation](https://code.google.com/p/plex-api/wiki/StatusSessions).
+
+```js
+control.currently.playing(function(result){
+	if (!result) {
+		console.log("Nothing is currently playing");
+	} else {
+		console.log("Currently playing a %s titled: %s",
+			result.attributes.type,
+			result.attributes.title);
+	}
 });
+
 ```
 
 ## Changelog
+
+### v1.0.0
+- Added the .currently commands
+- Major bumped when.js from v2 to v3
+- Changed control.on("resolved") to provide the whole plex client object found by hostname or IP, rather than just the IP-address
 
 ### v0.2.0
 - Converted all methods to be promise based, rather than callbacks
@@ -69,7 +98,7 @@ control.navigation.moveUp().then(function(){
 ## License
 (The MIT License)
 
-Copyright (c) 2013 Phillip Johnsen &lt;phillip@lightweight.no&gt;
+Copyright (c) 2013-2014 Phillip Johnsen &lt;phillip@lightweight.no&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
