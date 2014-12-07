@@ -73,7 +73,7 @@ control.currently.paused();
 It resolves to an object representing what's currently playing/paused. The object has lots of details about the given media. Hints of what's available in these gigantic detailed media representations can be found on the XML example on the [StatusSessions page in the unofficial Plex API documentation](https://code.google.com/p/plex-api/wiki/StatusSessions).
 
 ```js
-control.currently.playing(function(result){
+control.currently.playing().then(function(result){
 	if (!result) {
 		console.log("Nothing is currently playing");
 	} else {
