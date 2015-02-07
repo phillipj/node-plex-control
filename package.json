@@ -29,6 +29,9 @@
     "api",
     "control"
   ],
+  "engines": {
+    "node": ">=0.10"
+  },
   "author": "Phillip Johnsen <phillip@lightweight.no>",
   "license": "MIT"
 }
