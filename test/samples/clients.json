@@ -1,0 +1,28 @@
+{
+  "_elementType": "MediaContainer",
+  "_children": [
+    {
+      "_elementType": "Server",
+      "name": "mac-mini",
+      "host": "192.168.0.1",
+      "address": "192.168.0.2",
+      "port": 3005,
+      "machineIdentifier": "66f7da37",
+      "version": "1.2.3.378-0c92ed32",
+      "protocol": "plex",
+      "product": "Plex Home Theater",
+      "deviceClass": "HTPC",
+      "protocolVersion": "1",
+      "protocolCapabilities": "navigation,playback,timeline,mirror,playqueues"
+    },
+    {
+      "_elementType": "Server",
+      "name": "imac",
+      "host": "192.168.0.1",
+      "address": "192.168.0.3",
+      "port": 3000,
+      "machineIdentifier": "66f7da38",
+      "version": "0.9.5.4-f067f15"
+    }
+  ]
+}

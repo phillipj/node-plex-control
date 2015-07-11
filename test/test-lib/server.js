@@ -33,8 +33,8 @@ TestServer.prototype.clearRequestHistory = function() {
 	this._requestCountOnUri = {};
 };
 
-TestServer.prototype.nextResponseOnUrl = function(url, xmlFilename) {
-	this._specificResponse[url] = xmlFilename;
+TestServer.prototype.nextResponseOnUrl = function(url, jsonFilename) {
+	this._specificResponse[url] = jsonFilename;
 };
 
 function recordRequestedUri(req) {
@@ -45,9 +45,11 @@ function recordRequestedUri(req) {
 function createHttpServer(serverWrapper) {
 	return http.createServer(function(req, res) {
 		var requestedPath = req.url.substr(1).replace('/', '_');
-		var xmlFilename = serverWrapper._specificResponse[req.url] || requestedPath +".xml";
+		var jsonFilename = serverWrapper._specificResponse[req.url] || requestedPath +".json";
 
-		res.writeHead(200);
+		res.writeHead(200, {
+			'Content-Type': 'application/json'
+		});
 
 		if (["clients", "status_sessions"].indexOf(requestedPath) === -1) {
 			return res.end();
@@ -56,7 +58,7 @@ function createHttpServer(serverWrapper) {
 		// just in case a specific response was set for this URL
 		delete serverWrapper._specificResponse[req.url];
 
-		fs.createReadStream("test/samples/"+ xmlFilename).pipe(res);
+		fs.createReadStream("test/samples/"+ jsonFilename).pipe(res);
 	}).on("error", function(err){
 		console.error("Error from the test server:", err.stack);
 	});

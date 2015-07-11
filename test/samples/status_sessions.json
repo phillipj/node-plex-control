@@ -1,0 +1,210 @@
+{
+    "_elementType": "MediaContainer",
+    "_children": [
+        {
+            "_elementType": "Video",
+            "addedAt": "1417268010",
+            "art": "/library/metadata/9/art/1417268042",
+            "chapterSource": "",
+            "duration": "18018",
+            "guid": "local://9",
+            "key": "/library/metadata/9",
+            "librarySectionID": "1",
+            "ratingKey": "9",
+            "sessionKey": "1",
+            "summary": "",
+            "thumb": "/library/metadata/9/thumb/1417268042",
+            "title": "An episode",
+            "type": "episode",
+            "updatedAt": "1417268042",
+            "viewOffset": "1512",
+            "_children": [
+                {
+                    "_elementType": "Media",
+                    "aspectRatio": "1.78",
+                    "audioChannels": "2",
+                    "audioCodec": "pcm",
+                    "bitrate": "31852",
+                    "container": "mov",
+                    "duration": "18018",
+                    "has64bitOffsets": "0",
+                    "height": "1080",
+                    "id": "9",
+                    "optimizedForStreaming": "0",
+                    "videoCodec": "h264",
+                    "videoFrameRate": "24p",
+                    "videoResolution": "1080",
+                    "width": "1920",
+                    "_children": [
+                        {
+                            "_elementType": "Part",
+                            "container": "mov",
+                            "duration": "18018",
+                            "file": "/mnt/movies/an-episode.mov",
+                            "has64bitOffsets": "0",
+                            "id": "9",
+                            "key": "/library/parts/9/file.mov",
+                            "optimizedForStreaming": "0",
+                            "size": "71739780",
+                            "_children": [
+                                {
+                                    "_elementType": "Stream",
+                                    "bitDepth": "8",
+                                    "bitrate": "29999",
+                                    "cabac": "1",
+                                    "chromaSubsampling": "4:2:0",
+                                    "codec": "h264",
+                                    "codecID": "avc1",
+                                    "colorSpace": "yuv",
+                                    "duration": "18018",
+                                    "frameRate": "23.976",
+                                    "frameRateMode": "cfr",
+                                    "hasScalingMatrix": "0",
+                                    "height": "1080",
+                                    "id": "17",
+                                    "index": "0",
+                                    "level": "41",
+                                    "profile": "high",
+                                    "refFrames": "1",
+                                    "scanType": "progressive",
+                                    "streamIdentifier": "1",
+                                    "streamType": "1",
+                                    "title": "",
+                                    "width": "1920"
+                                },
+                                {
+                                    "_elementType": "Stream",
+                                    "bitDepth": "16",
+                                    "bitrate": "1536",
+                                    "bitrateMode": "cbr",
+                                    "channels": "2",
+                                    "codec": "pcm",
+                                    "codecID": "sowt",
+                                    "duration": "18018",
+                                    "id": "18",
+                                    "index": "1",
+                                    "profile": "pcm_s16le",
+                                    "samplingRate": "48000",
+                                    "selected": "1",
+                                    "streamIdentifier": "2",
+                                    "streamType": "2",
+                                    "title": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "_elementType": "User",
+                    "id": "1",
+                    "thumb": "https://secure.gravatar.com/avatar/b98a3400699cfcb2812552154b652a68?d=https%3A%2F%2Fplex.tv%2Favatars%2FA14349%2F46%2F1",
+                    "title": "flipp_"
+                },
+                {
+                    "_elementType": "Player",
+                    "machineIdentifier": "66f7da37",
+                    "platform": "Plex Home Theater",
+                    "product": "Plex Home Theater",
+                    "state": "paused",
+                    "title": "iMac"
+                }
+            ]
+        },
+        {
+            "_elementType": "Photo",
+            "addedAt": "1417268080",
+            "guid": "com.plexapp.agents.none://21?lang=xn",
+            "index": "1",
+            "key": "/library/metadata/21",
+            "librarySectionID": "2",
+            "originallyAvailableAt": "2014-07-24",
+            "ratingKey": "21",
+            "sessionKey": "1",
+            "summary": "",
+            "thumb": "/library/metadata/21/thumb/1417268090",
+            "title": "IMG_1731",
+            "type": "photo",
+            "updatedAt": "1417268090",
+            "year": "2014",
+            "_children": [
+                {
+                    "_elementType": "Media",
+                    "aperture": "f/2.2",
+                    "aspectRatio": "1.33",
+                    "container": "jpeg",
+                    "exposure": "1/17",
+                    "height": "3264",
+                    "id": "21",
+                    "iso": "500",
+                    "make": "Apple",
+                    "model": "iPhone 5s",
+                    "width": "2448",
+                    "_children": [
+                        {
+                            "_elementType": "Part",
+                            "container": "jpeg",
+                            "file": "/mnt/pictures/IMG_1731.JPG",
+                            "id": "21",
+                            "key": "/library/parts/21/file.JPG",
+                            "orientation": "1",
+                            "size": "1079707",
+                            "_children": [
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "_elementType": "User",
+                    "id": "1",
+                    "thumb": "https://secure.gravatar.com/avatar/b98a3400699cfcb2812552154b652a68?d=https%3A%2F%2Fplex.tv%2Favatars%2FA14349%2F46%2F1",
+                    "title": "flipp_"
+                },
+                {
+                    "_elementType": "Player",
+                    "machineIdentifier": "66f7da37",
+                    "platform": "Plex Home Theater",
+                    "product": "Plex Home Theater",
+                    "state": "playing",
+                    "title": "iMac"
+                }
+            ]
+        },
+        {
+            "_elementType": "Track",
+            "addedAt": "1396406847",
+            "thumb": "/library/metadata/780/art/1396406868",
+            "originalTitle": "Steve Miller Band",
+            "parentTitle": "Greatest Hits 1974-78",
+            "title": "The Joker",
+            "titleSort": "Joker",
+            "updatedAt": "1396406870",
+            "viewOffset": "48550",
+            "type": "track",
+            "_children": [
+                {
+                    "_elementType": "Media",
+                    "id": "759",
+                    "audioChannels": "2",
+                    "audioCodec": "mp3",
+                    "bitrate": "320",
+                    "container": "mp3",
+                    "duration": "217782"
+                },
+                {
+                    "_elementType": "User",
+                    "id": "1",
+                    "thumb": "http://www.gravatar.com/avatar/57ddfffd0c28b16997abce76964b5c03?d=404",
+                    "title": "Phony username"
+                },
+                {
+                    "_elementType": "Player",
+                    "machineIdentifier": "bd3cf20c",
+                    "platform": "Plex Home Theater",
+                    "product": "Plex Home Theater",
+                    "state": "playing",
+                    "title": "Mac mini"
+                }
+            ]
+        }
+    ]
+}

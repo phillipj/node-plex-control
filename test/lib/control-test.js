@@ -7,6 +7,7 @@ var SERVER_HOST = "localhost";
 var CLIENT_NAME = "mac-mini";
 var CLIENT_ADDRESS = "192.168.0.2";
 
+var NotFoundError = require("../../lib/NotFoundError");
 var PlexControl = require("../..").PlexControl;
 
 describe("Module API", function(done) {
@@ -38,7 +39,7 @@ describe("Module API", function(done) {
 
 	describe("getClients()", function() {
 		it("exists", function() {
-			expect(control.getClients).to.be.a('function');
+			expect(control.getClients).to.be.a("function");
 		});
 
 		it("should request API resource /clients", function() {
@@ -50,12 +51,6 @@ describe("Module API", function(done) {
 		it("should retrieve available Plex clients from API", function() {
 			return control.getClients().then(function(clients) {
 				expect(clients.length).to.be(2);
-			});
-		});
-
-		it("should flatten clients objects recieved from the API by having the attributes directly onto the object", function() {
-			return control.getClients().then(function(clients) {
-				expect(clients[1].name).to.be(CLIENT_NAME);
 			});
 		});
 	});
@@ -83,9 +78,9 @@ describe("Module API", function(done) {
 			});
 		});
 
-		it("should resolve promise with undefined when client could not be found", function() {
-			return control.getClientInfo("nonexistent-client").then(function(client) {
-				expect(client).to.be(undefined);
+		it("should reject promise with a NotFoundError when client could not be found", function() {
+			return control.getClientInfo("nonexistent-client").then(null, function(err) {
+				expect(err).to.be.an(NotFoundError);
 			});
 		});
 
@@ -123,14 +118,14 @@ describe("Module API", function(done) {
 		it("should have a photo-property in returned object when client has a photo session", function() {
 			return control.getSessions().then(function(sessions){
 				expect(sessions).to.have.property("photo");
-				expect(sessions.photo.attributes.title).to.be("SmDM0fZ");
+				expect(sessions.photo.title).to.be("IMG_1731");
 			});
 		});
 
 		it("should have a video-property in returned object when client has a video session", function() {
 			return control.getSessions().then(function(sessions){
-				expect(sessions).to.have.property("video");
-				expect(sessions.video.attributes.title).to.be("Pilot");
+				expect(sessions).to.have.property("episode");
+				expect(sessions.episode.title).to.be("An episode");
 			});
 		});
 

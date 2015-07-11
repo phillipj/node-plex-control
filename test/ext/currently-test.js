@@ -17,13 +17,13 @@ describe("Currently extension", function() {
 
 	it("should resolve to an object with .type == 'photo' when client is displaying a photo", function() {
 		return control.currently.playing().then(function(result) {
-			expect(result.attributes.type).to.be("photo");
+			expect(result.type).to.be("photo");
 		});
 	});
 
 	it("should resolve to an object with .type == 'episode' when client has paused an episode", function() {
 		return control.currently.paused().then(function(result) {
-			expect(result.attributes.type).to.be("episode");
+			expect(result.type).to.be("episode");
 		});
 	});
 
@@ -37,10 +37,10 @@ describe("Currently extension", function() {
 	it("should resolve to an object with .type == 'track' when server has only having one session and client is playing a track", function() {
 		var imacControl = new PlexControl(SERVER_HOST, CLIENT_HOST_IMAC);
 
-		server.nextResponseOnUrl("/status/sessions", "status_sessions_single.xml");
+		server.nextResponseOnUrl("/status/sessions", "status_sessions_single.json");
 
 		return imacControl.currently.playing().then(function(result) {
-			expect(result.attributes.type).to.be("track");
+			expect(result.type).to.be("track");
 		});
 	});
 

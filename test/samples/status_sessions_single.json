@@ -1,0 +1,42 @@
+{
+    "_elementType": "MediaContainer",
+    "_children": [
+        {
+            "_elementType": "Track",
+            "addedAt": "1396406847",
+            "thumb": "/library/metadata/780/art/1396406868",
+            "originalTitle": "Steve Miller Band",
+            "parentTitle": "Greatest Hits 1974-78",
+            "title": "The Joker",
+            "titleSort": "Joker",
+            "updatedAt": "1396406870",
+            "viewOffset": "48550",
+            "type": "track",
+            "_children": [
+                {
+                    "_elementType": "Media",
+                    "id": "759",
+                    "audioChannels": "2",
+                    "audioCodec": "mp3",
+                    "bitrate": "320",
+                    "container": "mp3",
+                    "duration": "217782"
+                },
+                {
+                    "_elementType": "User",
+                    "id": "1",
+                    "thumb": "http://www.gravatar.com/avatar/57ddfffd0c28b16997abce76964b5c03?d=404",
+                    "title": "Phony username"
+                },
+                {
+                    "_elementType": "Player",
+                    "machineIdentifier": "66f7da38",
+                    "platform": "Plex Home Theater",
+                    "product": "Plex Home Theater",
+                    "state": "playing",
+                    "title": "Mac mini"
+                }
+            ]
+        }
+    ]
+}

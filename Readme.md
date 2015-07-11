@@ -85,7 +85,24 @@ control.currently.playing().then(function(result){
 
 ```
 
+**getClientInfo(name | IP)**
+
+Returns a promise containing the info about the client matched by either the name or IP-address provided. Rejects with a `NotFoundError` if client was not found.
+
 ## Changelog
+
+### v2.0.0
+- Upgraded the plex-api dependency from v0.x -> v3.0.0 by @phillipj
+- getClientInfo() might reject with NotFoundError by @phillipj
+
+#### BREAKING CHANGES FROM v1.x
+
+`control.api` which holds a reference to the underlying [plex-api](https://www.npmjs.com/package/plex-api) instance,
+has gotten a major upgrade. Read more especially about the XML -> JSON changes done in plex-api between v1.0 and v2.0.
+
+`getClientInfo()` rejects with a `NotFoundError` instead of resolving to an `undefined` value. To check whether or not
+the error is a NotFoundError you could check `err.name === 'NotFound'` or compare the error instance against the exposed
+NotFoundError constructor from this module (`require('plex-control').NotFoundError`).
 
 ### v1.0.0
 - Added the .currently commands
