@@ -4,6 +4,8 @@ Node module used to control Plex clients. Utilises the Plex Media Server HTTP AP
 
 ## Usage
 
+**PlexControl(serverIp, clientNameOrIp[, options])**
+
 ```js
 var PlexControl = require("plex-control").PlexControl;
 
@@ -14,6 +16,8 @@ var control = new PlexControl("192.168.0.1", "mac-mini");
 // ..or assigning client by IP address
 control = new PlexControl("192.168.0.1", "192.168.0.2");
 ```
+
+If **options** are provided they are given to the underlying [plex-api](https://www.npmjs.com/package/plex-api) upon instantiation.
 
 ### Commands
 
