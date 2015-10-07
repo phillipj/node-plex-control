@@ -7,14 +7,14 @@
     "lib"
   ],
   "dependencies": {
-    "plex-api": "^3.0.0",
-    "validator": "^3.22.1",
-    "when": "^3.6.3"
+    "plex-api": "3.2.0",
+    "validator": "3.43.0",
+    "when": "3.7.3"
   },
   "devDependencies": {
-    "expect.js": "*",
-    "mocha": "*",
-    "sinon": "*"
+    "expect.js": "0.3.1",
+    "mocha": "2.3.3",
+    "sinon": "1.17.1"
   },
   "scripts": {
     "test": "mocha test/bootstrapTests.js test/**/*-test.js",
