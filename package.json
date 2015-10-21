@@ -14,7 +14,7 @@
   "devDependencies": {
     "expect.js": "0.3.1",
     "mocha": "2.3.3",
-    "sinon": "1.17.1"
+    "sinon": "1.17.2"
   },
   "scripts": {
     "test": "mocha test/bootstrapTests.js test/**/*-test.js",
