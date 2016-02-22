@@ -8,7 +8,7 @@
   ],
   "dependencies": {
     "plex-api": "^3.3.0",
-    "validator": "^4.5.2",
+    "validator": "^5.0.0",
     "when": "^3.7.7"
   },
   "devDependencies": {
