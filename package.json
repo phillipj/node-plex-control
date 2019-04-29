@@ -7,13 +7,13 @@
     "lib"
   ],
   "dependencies": {
-    "plex-api": "^3.3.0",
+    "plex-api": "^5.2.2",
     "validator": "^5.0.0",
     "when": "^3.7.7"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
-    "mocha": "^2.5.0",
+    "mocha": "^4.1.0",
     "sinon": "^1.17.3"
   },
   "scripts": {
@@ -30,7 +30,7 @@
     "control"
   ],
   "engines": {
-    "node": ">=0.10"
+    "node": ">=4.0"
   },
   "author": "Phillip Johnsen <phillip@lightweight.no>",
   "license": "MIT"
