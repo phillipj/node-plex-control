@@ -95,6 +95,14 @@ Returns a promise containing the info about the client matched by either the nam
 
 ## Changelog
 
+### v3.0.0
+- Upgraded the plex-api dependency from v3.x -> v5.2.2 by @phillipj
+
+#### BREAKING CHANGES FROM v2.x
+
+`control.api` which holds a reference to the underlying [plex-api](https://www.npmjs.com/package/plex-api) instance,
+has gotten a major upgrade.
+
 ### v2.0.0
 - Upgraded the plex-api dependency from v0.x -> v3.0.0 by @phillipj
 - getClientInfo() might reject with NotFoundError by @phillipj
