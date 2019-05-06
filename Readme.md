@@ -95,6 +95,9 @@ Returns a promise containing the info about the client matched by either the nam
 
 ## Changelog
 
+### v3.0.1
+- Upgraded the validator dependency from v5.x -> v10.x by @phillipj
+
 ### v3.0.0
 - Upgraded the plex-api dependency from v3.x -> v5.2.2 by @phillipj
 
